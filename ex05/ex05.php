@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bài tập 02</title>
+    <title>Bài tập 05</title>
 </head>
 <body>
     <p>Vẽ vòng lặp</p>
@@ -13,7 +13,7 @@
         <input type="text" name="num">
         <input type="submit" name="calculate" value="Vẽ">
     </form>
-    
+    &nbsp;
     <br>
     
     <?php 
@@ -28,15 +28,11 @@
                 echo "$num không phải là số nguyên dương, mời nhập lại.";
                 $s = 0;
             } else {
-                for ($i = $num - 1; $i >= 0; $i--) {
-                    for ($j = 0; $j <= $num - 1; $j++) {
-                        if ($j >= $i) {
-                            echo "#";
-                        } else {
-                            echo "&nbsp;&nbsp;";
-                        }
+                for ($i = 0; $i <= $num; $i++) {
+                    for ($j = 0; $j <= $i; $j++) {
+                        echo "#";
                     }
-                    echo "<br>";
+                    echo "<br>";                 
                 }
             }
         }
