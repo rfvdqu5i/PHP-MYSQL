@@ -6,6 +6,7 @@
 </head>
 <body>
     <?php
+        $arr_name = array();
         $ho = null;
         $ten = null;
         $dem = null;
@@ -13,18 +14,18 @@
             
             // Lấy chuỗi trong input
             $name = isset($_POST['name']) ? trim($_POST['name']) : '';
-            if ($name == "") {
-                $result = "Nhập tên.";
-            } else {
-                // Xử lý chuỗi
-                $name = trim($name);
-                $name = mb_strtolower($name, 'UTF-8');
-                $name = ucwords($name);
+            // Xử lý chuỗi
+            $name = trim($name);
+            $name = mb_strtolower($name, 'UTF-8');
+            $name = ucwords($name);
                 
-                $arr_name = explode($name);
-                $len = count($arr_name);
-                $ho = $arr_name[0];
-                $ten = $arr_name[$len];
+            $arr_name = explode(' ',$name);
+            $len = count($arr_name);
+            $ho = $arr_name[0];
+            $ten = $arr_name[$len-1];
+                
+            for ($i=1; $i < ($len - 1); $i++) {
+                $dem = $dem.$arr_name[$i]." ";
             }
         } 
   
@@ -44,17 +45,19 @@
         </pre>
         <hr>
         <br>
-        Nhập chuỗi cần kiểm tra : 
-        <input type="text" name="name"> <br> <br>
-        <input type="submit" name="stand" value="Chuẩn hóa">
+        Nhập họ tên : 
+        <input type="text" name="name" style="width:500px"> <br> <br>
+        <input type="submit" name="stand" value="Tách">
         <br> <br>
     </form>
     
     <?php
         // In kết quả
-        echo "<br>Họ: " .$ho;
-        echo "<br>Họ: " .$ho;
-        echo "<br>Tên: " .$ten;
+        if ($ho != "") {
+            echo "<br>Họ: " .$ho;
+            echo "<br>Đệm: " .$dem;
+            echo "<br>Tên: " .$ten;
+        } else echo "<br>Nhập họ tên."
     ?>
 </body>
 </html>
