@@ -33,5 +33,14 @@ $iphone->amounts = '15';
 $iphone->price = '24000000';
 $iphone->origin = 'Vietnam';
 
+$motor = new product();
+
+$motor->id = '003';
+$motor->name = 'Ducati 899 Panigale';
+$motor->amounts = '05';
+$motor->price = '540000000';
+$motor->origin = 'Italia';
+
 echo $laptop->export() . '<br>';
 echo $iphone->export() . '<br>';
+echo $motor->export() . '<br>';
