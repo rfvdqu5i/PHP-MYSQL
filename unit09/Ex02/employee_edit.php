@@ -1,0 +1,75 @@
+<?php 
+	include_once('connection.php');
+     
+     $CODE = $_GET['CODE'];
+
+	$query = "SELECT * FROM employees WHERE CODE='".$CODE."' ";
+
+     $result = $conn->query($query);
+     $emloyee = $result->fetch_assoc();
+		 
+ ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Zent Group</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+    <h3 align="center">ZENT GROUP - PHP - MYSQL</h3>
+    <h3 align="center">UPDATE NHÂN VIÊN</h3>
+    <br>
+    <a href="employee.php" class="btn btn-primary">Trang chủ</a>
+    <hr>
+        <form action="employee_edit_process.php" method="POST" role="form" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="">Mã nhân viên</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập vào mã nhân viên" name="CODE" value="<?= $emloyee['CODE'] ?>">
+            </div>
+            <div class="form-group">
+                <label for="">Tên nhân viên</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập vào tên nhân viên" name="NAME" value="<?= $emloyee['NAME'] ?>">
+            </div>  
+            <div class="form-group">
+                <label for="">Ảnh nhân viên</label>
+                <input type="file" accept="image/*" onchange="loadFile(event)" id="IMG" name="IMG">
+                <br>
+                <img id="output" width="50px" src="img/employees/<?= $emloyee['IMG'] ?> "> 
+            </div>
+            <div class="form-group">
+                <label for="">Email</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập vào email" name="EMAIL" value="<?= $emloyee['EMAIL'] ?>">
+            </div>
+            <div class="form-group">
+                <label for="">Số điện thoại</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập vào số điện thoại" name="MOBILE" value="<?= $emloyee['MOBILE'] ?>">
+            </div>
+            <div class="form-group">
+                <label for="">Địa chỉ</label>
+                <input type="text" class="form-control" id="" placeholder="Nhập vào địa chỉ" name="ADDRESS" value="<?= $emloyee['ADDRESS'] ?>">
+            </div>
+            
+            <button type="submit" name="submit" class="btn btn-primary">Lưu thông tin</button>
+            
+        </form>
+    </div>
+    
+    <script>
+          var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+          };
+    </script>
+    
+</body>
+</html>
