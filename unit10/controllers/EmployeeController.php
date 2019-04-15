@@ -10,9 +10,9 @@
         }
         
         public function detail() {
-            $p_model = new Employee();
+            $e_model = new Employee();
             $code = $_GET['code'];
-            $employee = $p_model->find($code);
+            $employee = $e_model->find($code);
             
             include_once('view/detail.php');
         }

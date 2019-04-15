@@ -23,10 +23,7 @@
 </body>
 
 </html>
-
-   
-
-   
+ 
 <?php
     
     $mod = isset($_GET['mod']) ? $_GET['mod'] : '';

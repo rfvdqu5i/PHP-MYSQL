@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Zent Group</title>
     <!-- Latest compiled and minified CSS -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
     <!-- Optional theme -->
@@ -43,7 +45,7 @@
                     <td><?= $row['MOBILE'] ?></td>
                     <td><?= $row['ADDRESS'] ?></td>
                     <td><a href="?mod=employee&act=detail&code=<?= $row['CODE'] ?>" class="btn btn-danger">Detail</a></td>
-                    <td><a href="#" class="btn btn-danger">Upgrade</a></td>
+                    <td><a href="javasript:;" class="btn btn-primary btn-show" data-id="<?= $row['CODE'] ?>" data-toggle="modal" data-target="#exampleModalCenter">Show</a></td>
                     <td><a href="#" class="btn btn-danger">Delete</a></td>
                 </tr>
                 <?php
@@ -52,6 +54,58 @@
             </tbody>
         </table>
     </div>
+    
+    <div class="modal fade" id="modal-show" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Thông tin nhân viên</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" alt="">
+                    <p>Mã nhân viên: <span id="code_detail_employee"></span></p>
+                    <p>Tên nhân viên: <span id="name_detail_employee"></span></p>
+                    <img src="" alt="" id="images_employee" style="width: 50px;">
+                    <p>Email: <span id="email_detail_employee"></span></p>
+                    <p>Số điện thoại: <span id="mobile_detail_employee"></span></p>
+                    <p>Địa chỉ: <span id="address_detail_employee"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('.btn-show').on('click', function() {
+                $('#modal-show').modal('show');
+                var id = $(this).data('id');
+            
+                $.ajax({
+                    type: 'get',
+                    dataType: "json",
+                    url: 'employee_detail.php?CODE=' + id,
+                    success: function(reponse) {
+
+                        $('#code_detail_employee').html(reponse.CODE);
+                        $('#name_detail_employee').html(reponse.NAME);
+                        $('#images_employee').attr("src", "public/img/" + reponse.IMG + "")
+                        $('#email_detail_employee').html(reponse.EMAIL);
+                        $('#mobile_detail_employee').html(reponse.MOBILE);
+                        $('#address_detail_employee').html(reponse.ADDRESS);
+                     
+                    }
+                });
+            });
+        });
+
+    </script>
 </body>
 
 </html>
